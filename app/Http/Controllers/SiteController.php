@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class SiteController extends Controller
 {
@@ -11,13 +12,16 @@ class SiteController extends Controller
      */
     public function index()
     {
-        dd("chegou aqui na controller");
+        $apiUrl = 'https://jsonplaceholder.typicode.com/users';
 
-        $data = [
-            "" => "",
-        ];
+        $response = Http::get($apiUrl);
 
-        return view('produto', $data);
+        if ($response->successful()) {
+            $data = $response->json();
+        } else {
+            $data = [];
+        }
+        return view('produto', compact('data'));
     }
 
     /**

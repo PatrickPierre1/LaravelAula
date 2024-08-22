@@ -7,6 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>Dados da API</h1>
+    @if(!empty($data))
+        <ul>
+            @foreach($data as $item)
+                <li>{{ $item['id'] }} - {{ $item['name'] }}</li>
+            @endforeach
+        </ul>
+    @else
+        <p>Sem dados para mostrar.</p>
+    @endif
 </body>
 </html>
